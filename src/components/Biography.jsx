@@ -8,11 +8,9 @@ export const Biography = () => {
 		`Mohamed is a computer science student and is an enthusiastic web dev,
         he is currently learning JavaScript and other related web languages,tools, and topics and 
         will hopefully share all that he learns in this journey with you in articles so stay tuned`,
-
 		`Mohamed is a software engineer that respects the quality of the code and the cleanness of it
         and a very passionate Web developer that keeps up with all the new trends in development and the JavaScript
-        frameworks and open to use and learn different tech to solve problems in a more efficient way and will write about all this in here.  
-         he mainly works with React but he's flexable with the choices, he has some knowledge in the backend and in the design patterns too
+        frameworks and open to use and learn different tech to solve problems in a more efficient way and will write about all this in here.\nhe mainly works with React but he's flexable with the choices, he has some knowledge in the backend and in the design patterns too
         and also a certified AWS practitioner`,
 	];
 	const [biography, setBiography] = useState(null);
@@ -100,7 +98,7 @@ export const Biography = () => {
 						<span className="inline-block">longest</span>
 					</div>
 				</div>
-				<p className=" w-full text-xl font-mono pt-6 leading-8 tracking-wider ">
+				<p className=" w-full text-xl font-mono px-20 pt-6 leading-8 tracking-wider ">
 					{biography}
 				</p>
 			</div>
