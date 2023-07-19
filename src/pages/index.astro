@@ -1,4 +1,6 @@
 ---
+import Header from "../components/Header.astro";
+import Main from "../components/Main.astro";
 ---
 
 <html lang="en">
@@ -6,10 +8,40 @@
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body
+		class="leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900"
+	>
+		<div class="flex justify-center mt-52">
+			<Header />
+			<Main />
+		</div>
 	</body>
 </html>
+
+<style is:global>
+	* {
+		margin: 0px;
+		padding: 0px;
+		font-size: 10px;
+	}
+	body {
+		background: linear-gradient(
+			90deg,
+			rgb(10, 16, 29) 0%,
+			rgb(16, 5, 56) 33%,
+			rgb(16, 5, 56) 66%,
+			rgb(10, 16, 29) 100%
+		);
+		font-family: "Inter", sans-serif;
+	}
+</style>
+<!-- radial-gradient( 600px circle at 0px 0px, rgba(29, 78, 216, 0.15), transparent 80% ); -->
