@@ -13,27 +13,32 @@ export const Biography = () => {
         frameworks and open to use and learn different tech to solve problems in a more efficient way and will write about all this in here.\nhe mainly works with React but he's flexable with the choices, he has some knowledge in the backend and in the design patterns too
         and also a certified AWS practitioner`,
 	];
-	const [biography, setBiography] = useState(null);
+	const [currentBio, setCurrentBio] = useState(1);
+	const [biography, setBiography] = useState(biographiesArray[1]);
 
 	const handleBioChange = (e) => {
 		const bioType = e.target.value;
 		switch (bioType) {
 			case "shortest":
-				setBiography(biographiesArray[0]);
+				updateBio(0);
 				break;
 			case "short":
-				setBiography(biographiesArray[1]);
+				updateBio(1);
 				break;
 			case "long":
-				setBiography(biographiesArray[2]);
+				updateBio(2);
 				break;
 			case "longest":
-				setBiography(biographiesArray[3]);
+				updateBio(3);
 				break;
 
 			default:
 				break;
 		}
+	};
+	const updateBio = (bioIndex) => {
+		setBiography(biographiesArray[bioIndex]);
+		setCurrentBio(bioIndex);
 	};
 	return (
 		<>
@@ -49,8 +54,9 @@ export const Biography = () => {
 						<div className="flex mt-8 mb-3 mx-auto justify-evenly w-10/12">
 							<div>
 								<input
+									checked={currentBio === 0}
 									onChange={handleBioChange}
-									className="appearance-none rounded-full border  bg-gray-200 bg-opacity-80 border-slate-950 w-5 h-5 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_7px_transparent] before:content-[''] checked:before:opacity-[0.16]  hover:cursor-pointer focus:shadow-none focus:outline-none focus:ring-1 focus:ring-white focus:before:scale-100 focus:before:opacity-[0.16] focus:before:shadow-[0px_0px_0px_7px_rgba(0,0,0,0.8)] focus:before:transition-[box-shadow_0.2s,transform_0.2s]  checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_7px_#ffffff75] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:bg-slate-600"
+									className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-500 checked:bg-slate-500 checked:ring-1 checked:ring-gray-100 checked:before:bg-gray-100 hover:before:opacity-10"
 									type="radio"
 									name="biolength"
 									value={"shortest"}
@@ -59,9 +65,9 @@ export const Biography = () => {
 							</div>
 							<div>
 								<input
+									checked={currentBio === 1}
 									onChange={handleBioChange}
-									defaultChecked
-									className="appearance-none rounded-full border  bg-gray-200 bg-opacity-80 border-slate-950 w-5 h-5 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_7px_transparent] before:content-[''] checked:before:opacity-[0.16]  hover:cursor-pointer focus:shadow-none focus:outline-none focus:ring-1 focus:ring-white focus:before:scale-100 focus:before:opacity-[0.16] focus:before:shadow-[0px_0px_0px_7px_rgba(0,0,0,0.8)] focus:before:transition-[box-shadow_0.2s,transform_0.2s]  checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_7px_#ffffff75] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:bg-slate-600"
+									className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-500 checked:bg-slate-500 checked:ring-1 checked:ring-gray-100 checked:before:bg-gray-100 hover:before:opacity-10"
 									type="radio"
 									name="biolength"
 									value={"short"}
@@ -70,8 +76,9 @@ export const Biography = () => {
 							</div>
 							<div>
 								<input
+									checked={currentBio === 2}
 									onChange={handleBioChange}
-									className="appearance-none rounded-full border  bg-gray-200 bg-opacity-80 border-slate-950 w-5 h-5 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_7px_transparent] before:content-[''] checked:before:opacity-[0.16]  hover:cursor-pointer focus:shadow-none focus:outline-none focus:ring-1 focus:ring-white focus:before:scale-100 focus:before:opacity-[0.16] focus:before:shadow-[0px_0px_0px_7px_rgba(0,0,0,0.8)] focus:before:transition-[box-shadow_0.2s,transform_0.2s]  checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_7px_#ffffff75] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:bg-slate-600"
+									className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-500 checked:bg-slate-500 checked:ring-1 checked:ring-gray-100 checked:before:bg-gray-100 hover:before:opacity-10"
 									type="radio"
 									name="biolength"
 									value={"long"}
@@ -80,8 +87,9 @@ export const Biography = () => {
 							</div>
 							<div>
 								<input
+									checked={currentBio === 3}
 									onChange={handleBioChange}
-									className="appearance-none rounded-full border  bg-gray-200 bg-opacity-80 border-slate-950 w-5 h-5 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_7px_transparent] before:content-[''] checked:before:opacity-[0.16]  hover:cursor-pointer focus:shadow-none focus:outline-none focus:ring-1 focus:ring-white focus:before:scale-100 focus:before:opacity-[0.16] focus:before:shadow-[0px_0px_0px_7px_rgba(0,0,0,0.8)] focus:before:transition-[box-shadow_0.2s,transform_0.2s]  checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_7px_#ffffff75] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:bg-slate-600"
+									className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-500 checked:bg-slate-500 checked:ring-1 checked:ring-gray-100 checked:before:bg-gray-100 hover:before:opacity-10"
 									type="radio"
 									name="biolength"
 									value={"longest"}
@@ -105,3 +113,5 @@ export const Biography = () => {
 		</>
 	);
 };
+{
+}
