@@ -26,7 +26,7 @@ import articleImage from "../assets/Var.webp";
 		<div class="flex justify-evenly">
 			<button class="btn__medium">
 				<svg
-					class="inline-block me-2"
+					class="inline-block mx-1"
 					width="20px"
 					height="20px"
 					viewBox="0 -55 256 256"
@@ -45,7 +45,7 @@ import articleImage from "../assets/Var.webp";
 				</svg>
 				<span> Read on medium</span>
 			</button>
-			<button class="p-6">Read here</button>
+			<button class="btn__blog">Read here</button>
 		</div>
 	</div>
 </div>
@@ -78,6 +78,23 @@ import articleImage from "../assets/Var.webp";
 			transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 			transition-duration: 300ms;
 			display: none;
+		}
+	}
+
+	.btn__blog {
+		/* text-decoration: underline; */
+		border: 1px solid rgb(92, 92, 94);
+		font-size: 1.2rem;
+		box-shadow: inset 0 0 0 0 rgb(16, 14, 46);
+		color: rgb(130, 130, 136);
+		margin: 0 -0.25rem;
+		padding: 0.8rem 1.5rem;
+		border-radius: 9999px;
+		transition: all 0.3s ease-in, box-shadow 0.5s ease-in-out;
+		&:hover {
+			box-shadow: inset 100px 0 0 0 rgb(16, 14, 46);
+			color: rgb(229 231 235);
+			border: 1px solid rgb(145, 145, 150);
 		}
 	}
 </style>
