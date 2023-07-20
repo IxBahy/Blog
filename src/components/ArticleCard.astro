@@ -5,18 +5,18 @@ const { name, image, desc, mediumLink } = Astro.props;
 ---
 
 <div
-	class="w-5/6 mx-auto py-8 px-20 shadow-gray-950 shadow-md ring-slate-900 ring-2 rounded-md mt-6 bg-indigo-950 bg-opacity-50 text-gray-200"
+	class="w-5/6 mobile:w-full mobile:px-10 mx-auto py-8 px-20 mb-16 shadow-gray-950 shadow-md ring-slate-900 ring-2 rounded-md mt-6 bg-indigo-950 bg-opacity-50 text-gray-200"
 >
 	<h3 class="text-4xl text-start font-mono font-semibold">{name}</h3>
 	<!-- content -->
-	<div class="flex justify-center items-center">
+	<div class="flex justify-center items-center mobile:my-3">
 		<img
 			class="my-8 me-8 inline-block rounded-md opacity-90"
 			src={image}
 			width="100"
 			alt=""
 		/>
-		<p>
+		<p class="mobile:w-full">
 			{desc.length > 100 ? desc.substr(0, 100) + "..." : desc}
 		</p>
 	</div>
@@ -94,6 +94,16 @@ const { name, image, desc, mediumLink } = Astro.props;
 			box-shadow: inset 100px 0 0 0 rgb(16, 14, 46);
 			color: rgb(229 231 235);
 			border: 1px solid rgb(145, 145, 150);
+		}
+	}
+	@media screen and (max-width: 640px) {
+		.btn__medium:hover {
+			background-color: rgba(229, 231, 235, 0.8);
+			padding-inline-end: 0.5rem;
+			box-shadow: 0px 4px 9px 0px rgb(75 85 99);
+			& span {
+				display: none;
+			}
 		}
 	}
 </style>
