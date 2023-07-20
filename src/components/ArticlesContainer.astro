@@ -1,100 +1,48 @@
 ---
+import ArticleCard from "./ArticleCard.astro";
 import articleImage from "../assets/Var.webp";
+import comingSoonImage from "../assets/soon.webp";
+import closureImage from "../assets/closure.webp";
+
+const articlesArray = [
+	{
+		name: "The Var History",
+		image: articleImage,
+		desc: `var and let might do almost the same job but under the hood var is a different bread,
+            Variables declared with var are either function-scoped or global-scoped. They are visible through blocks => no block scope.
+            and they are always hoisted and tolerate redeclaration ‘ That’s the difference in a nutshell ‘`,
+		mediumLink: "https://medium.com/@ixbahy/the-javascript-var-676e740454db",
+	},
+	{
+		name: "Scopes & closures",
+		image: closureImage,
+		desc: `Some people said JavaScript has 2 scopes others said 3 and frankly some said 4 !!
+            all are right but we have to understand as in every programming language JS has two main scopes (Global, Local) and the Local scope consists of 2 other scopes (Function, Block)
+            so what are some uses of the scopes or why it’s important to understand them`,
+		mediumLink:
+			"https://medium.com/@ixbahy/javascript-scopes-environments-and-closures-922168eb7f2",
+	},
+	{
+		name: "prototype & inheritance",
+		image: comingSoonImage,
+		desc: `In the world of JavaScript, prototypes and inheritance are fundamental concepts.  while taking advantage of JavaScript's flexible and powerful object model.`,
+		mediumLink: "https://medium.com/@ixbahy",
+	},
+];
 ---
 
 <div class="mt-24">
 	<!-- article Card -->
-	<div
-		class="w-5/6 mx-auto py-8 px-20 shadow-gray-950 shadow-md ring-slate-900 ring-2 rounded-md mt-6 bg-indigo-950 bg-opacity-50 text-gray-200"
-	>
-		<h3 class="text-4xl text-start font-mono font-semibold">The Var history</h3>
-		<!-- content -->
-		<div class="flex justify-center items-center">
-			<img
-				class="my-8 me-8 inline-block rounded-md opacity-90"
-				src={articleImage}
-				width="100"
-				alt=""
-			/>
-			<p>
-				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi ducimus
-				quis eius magnam! Laudantium tempora, suscipit rerum nisi sapiente
-				quas....
-			</p>
-		</div>
-		<!-- buttons -->
-		<div class="flex justify-evenly">
-			<button class="btn__medium">
-				<svg
-					class="inline-block mx-1"
-					width="20px"
-					height="20px"
-					viewBox="0 -55 256 256"
-					version="1.1"
-					xmlns="http://www.w3.org/2000/svg"
-					xmlns:xlink="http://www.w3.org/1999/xlink"
-					preserveAspectRatio="xMidYMid"
-				>
-					<g>
-						<path
-							d="M72.2009141,1.42108547e-14 C112.076502,1.42108547e-14 144.399375,32.5485469 144.399375,72.6964154 C144.399375,112.844284 112.074049,145.390378 72.2009141,145.390378 C32.327779,145.390378 0,112.844284 0,72.6964154 C0,32.5485469 32.325326,1.42108547e-14 72.2009141,1.42108547e-14 Z M187.500628,4.25836743 C207.438422,4.25836743 223.601085,34.8960455 223.601085,72.6964154 L223.603538,72.6964154 C223.603538,110.486973 207.440875,141.134463 187.503081,141.134463 C167.565287,141.134463 151.402624,110.486973 151.402624,72.6964154 C151.402624,34.9058574 167.562834,4.25836743 187.500628,4.25836743 Z M243.303393,11.3867175 C250.314,11.3867175 256,38.835526 256,72.6964154 C256,106.547493 250.316453,134.006113 243.303393,134.006113 C236.290333,134.006113 230.609239,106.554852 230.609239,72.6964154 C230.609239,38.837979 236.292786,11.3867175 243.303393,11.3867175 Z"
-							fill="#000000"
-						>
-						</path>
-					</g>
-				</svg>
-				<span> Read on medium</span>
-			</button>
-			<button class="btn__blog">Read here</button>
-		</div>
-	</div>
+	{
+		articlesArray.map((article) => {
+			return (
+				<ArticleCard
+					name={article.name}
+					image={article.image}
+					desc={article.desc}
+					mediumLink={article.mediumLink}
+				/>
+			);
+		})
+	}
 </div>
-
-<style>
-	.btn__medium {
-		padding: 0.2rem 0.5rem;
-		overflow: hidden;
-		white-space: nowrap;
-		width: 4rem;
-		max-height: 4rem;
-		background-color: rgba(229, 231, 235, 0.9);
-		color: rgb(2, 6, 23);
-		border-radius: 9999px;
-		border: 1px solid rgb(2, 6, 23);
-		transition-property: all;
-		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-		transition-duration: 150ms;
-		box-shadow: 0px 4px 13px 0px rgb(17 24 39);
-		&:hover {
-			background-color: rgba(229, 231, 235, 0.8);
-			padding-inline-end: 12rem;
-			box-shadow: 0px 4px 9px 0px rgb(75 85 99);
-			& span {
-				display: inline;
-			}
-		}
-		& span {
-			transition-property: all;
-			transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-			transition-duration: 300ms;
-			display: none;
-		}
-	}
-
-	.btn__blog {
-		/* text-decoration: underline; */
-		border: 1px solid rgb(92, 92, 94);
-		font-size: 1.2rem;
-		box-shadow: inset 0 0 0 0 rgb(16, 14, 46);
-		color: rgb(130, 130, 136);
-		margin: 0 -0.25rem;
-		padding: 0.8rem 1.5rem;
-		border-radius: 9999px;
-		transition: all 0.3s ease-in, box-shadow 0.5s ease-in-out;
-		&:hover {
-			box-shadow: inset 100px 0 0 0 rgb(16, 14, 46);
-			color: rgb(229 231 235);
-			border: 1px solid rgb(145, 145, 150);
-		}
-	}
-</style>
