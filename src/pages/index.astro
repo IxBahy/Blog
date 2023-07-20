@@ -20,12 +20,12 @@ import Main from "../components/Main.astro";
 	<body
 		class="leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900"
 	>
-		<div class="svg__container svg--first">
+		<div class="svg__container svg--first mobile:top-32 mobile:left-16">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				width="523"
-				height="214"
-				viewBox="0 0 523 214"
+				width="200"
+				height="200"
+				viewBox="300 0 200 200"
 				data-shape="true"
 				aria-hidden="true"
 				id="cs-pattern-right"
@@ -35,12 +35,12 @@ import Main from "../components/Main.astro";
 				></path></svg
 			>
 		</div>
-		<div class="svg__container svg--second">
+		<div class="svg__container svg--second mobile:bottom-48 mobile:right-10">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				width="523"
-				height="214"
-				viewBox="0 0 523 214"
+				width="200"
+				height="200"
+				viewBox="300 0 200 200"
 				data-shape="true"
 				aria-hidden="true"
 				id="cs-pattern-right"
@@ -51,7 +51,7 @@ import Main from "../components/Main.astro";
 			>
 		</div>
 
-		<div class="flex justify-center mt-52">
+		<div class="flex justify-center mt-52 mobile:flex-col mobile:mx-20">
 			<Header />
 			<Main />
 		</div>
@@ -81,11 +81,11 @@ import Main from "../components/Main.astro";
 		height: fit-content;
 	}
 	.svg--first {
-		right: 20rem;
+		left: 15rem;
 		top: 2.5rem;
 	}
 	.svg--second {
-		left: -13rem;
+		right: 15rem;
 		bottom: 5rem;
 	}
 

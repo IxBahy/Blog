@@ -131,7 +131,7 @@ export const Biography = () => {
 						<span className="inline-block">longest</span>
 					</div>
 				</div>
-				<div className="mt-6 px-20">
+				<div className="mt-6 px-20 mobile:px-6">
 					<p
 						ref={bioRef}
 						className="inline text-2xl font-mono leading-8 tracking-wider overflow-x-hidden  "
