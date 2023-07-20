@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Biography = () => {
 	const biographiesArray = [
@@ -15,7 +15,10 @@ export const Biography = () => {
 	];
 	const [currentBio, setCurrentBio] = useState(1);
 	const [biography, setBiography] = useState(biographiesArray[1]);
-
+	const bioRef = useRef(null);
+	useEffect(() => {
+		printTextLetters(0, true);
+	}, [biography]);
 	const handleBioChange = (e) => {
 		const bioType = e.target.value;
 		switch (bioType) {
@@ -37,8 +40,30 @@ export const Biography = () => {
 		}
 	};
 	const updateBio = (bioIndex) => {
+		bioRef.current.innerHTML = "";
 		setBiography(biographiesArray[bioIndex]);
 		setCurrentBio(bioIndex);
+	};
+	const printTextLetters = (index, firstRun = false) => {
+		if (firstRun) {
+			disableRadioButtons(true);
+		}
+		if (index < biography.length) {
+			bioRef.current.innerHTML += biography.charAt(index);
+			index++;
+			setTimeout(() => {
+				printTextLetters(index);
+			}, 20);
+		} else {
+			console.log("here");
+			disableRadioButtons(false);
+		}
+	};
+	const disableRadioButtons = (isDisabled) => {
+		const radioInputs = document.querySelectorAll('input[type="radio"]');
+		radioInputs.forEach((input) => {
+			input.disabled = isDisabled;
+		});
 	};
 	return (
 		<>
@@ -106,9 +131,13 @@ export const Biography = () => {
 						<span className="inline-block">longest</span>
 					</div>
 				</div>
-				<p className=" w-full text-xl font-mono px-20 pt-6 leading-8 tracking-wider ">
-					{biography}
-				</p>
+				<div className="mt-6 px-20">
+					<p
+						ref={bioRef}
+						className="inline text-2xl font-mono leading-8 tracking-wider overflow-x-hidden  "
+					></p>
+					<span className="cursor"></span>
+				</div>
 			</div>
 		</>
 	);
