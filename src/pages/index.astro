@@ -18,7 +18,7 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 		<title>Bahy's Blog</title>
 	</head>
 	<body
-		class="leading-relaxed text-slate-400 antialiased selection:bg-slate-400 selection:text-slate-800"
+		class="relative leading-relaxed text-slate-400 antialiased selection:bg-slate-400 selection:text-slate-800"
 	>
 		<div class="svg__container svg--first mobile:top-32 mobile:left-16">
 			<svg
@@ -50,20 +50,33 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 				></path></svg
 			>
 		</div>
-
+		<div class="mouse__spotlight"></div>
 		<div class="flex justify-center mt-52 mobile:flex-col mobile:mx-20">
 			<Header />
 			<ArticlesContainer />
 		</div>
 	</body>
 </html>
-
+<script>
+	const spotlight = document.querySelector<HTMLElement>(".mouse__spotlight");
+	addEventListener("mousemove", (event: MouseEvent) => {
+		const x = event.clientX;
+		const y = event.clientY;
+		spotlight.style.top = y + "px";
+		spotlight.style.left = x + "px";
+		spotlight.style.display = "block";
+	});
+	addEventListener("mouseout", (event: MouseEvent) => {
+		spotlight.style.display = "none";
+	});
+</script>
 <style is:global>
 	* {
 		margin: 0px;
 		padding: 0px;
 		font-size: 10px;
 	}
+
 	body {
 		background: linear-gradient(
 			90deg,
@@ -73,6 +86,20 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 			rgb(10, 16, 29) 100%
 		);
 		font-family: "Inter", sans-serif;
+	}
+	.mouse__spotlight {
+		display: none;
+		position: fixed;
+		z-index: 9000;
+		pointer-events: none;
+		width: 40px;
+		height: 40px;
+		background: #d8dddd21;
+		box-shadow: 0 0 20px #94979733, 0 0 60px #888d8d6c, 0 0 100px #888d8d6c,
+			0 0 200px #c0c9c99a;
+		opacity: 0.5;
+		border-radius: 50%;
+		transform: translate(-40%, -40%);
 	}
 	.svg__container {
 		position: absolute;
@@ -134,4 +161,3 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 		}
 	}
 </style>
-<!-- radial-gradient( 600px circle at 0px 0px, rgba(29, 78, 216, 0.15), transparent 80% ); -->
