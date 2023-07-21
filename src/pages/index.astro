@@ -1,6 +1,6 @@
 ---
 import Header from "../components/Header.astro";
-import Main from "../components/Main.astro";
+import ArticlesContainer from "../components/ArticlesContainer.astro";
 ---
 
 <html lang="en">
@@ -18,7 +18,7 @@ import Main from "../components/Main.astro";
 		<title>Bahy's Blog</title>
 	</head>
 	<body
-		class="leading-relaxed text-slate-400 antialiased selection:bg-teal-300 selection:text-teal-900"
+		class="leading-relaxed text-slate-400 antialiased selection:bg-slate-400 selection:text-slate-800"
 	>
 		<div class="svg__container svg--first mobile:top-32 mobile:left-16">
 			<svg
@@ -35,7 +35,7 @@ import Main from "../components/Main.astro";
 				></path></svg
 			>
 		</div>
-		<div class="svg__container svg--second mobile:bottom-48 mobile:right-10">
+		<div class="svg__container svg--second mobile:bottom-48 mobile:right-24">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="200"
@@ -53,7 +53,7 @@ import Main from "../components/Main.astro";
 
 		<div class="flex justify-center mt-52 mobile:flex-col mobile:mx-20">
 			<Header />
-			<Main />
+			<ArticlesContainer />
 		</div>
 	</body>
 </html>
@@ -82,11 +82,14 @@ import Main from "../components/Main.astro";
 	}
 	.svg--first {
 		left: 15rem;
-		top: 2.5rem;
+		top: 5rem;
+		animation: svg__animation--spin 10s linear infinite,
+			svg__animation--first 1.5s ease-in-out;
 	}
 	.svg--second {
 		right: 15rem;
 		bottom: 5rem;
+		animation: svg__animation--spin 10s linear infinite;
 	}
 
 	.cursor {
@@ -99,6 +102,35 @@ import Main from "../components/Main.astro";
 	@keyframes cursor {
 		50% {
 			border: transparent;
+		}
+	}
+	@keyframes svg__animation--spin {
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	@keyframes svg__animation--first {
+		0% {
+			top: -30rem;
+		}
+		80% {
+			top: 8rem;
+		}
+		100% {
+			top: 5rem;
+		}
+	}
+	@media screen and (max-width: 640px) {
+		@keyframes svg__animation--first {
+			0% {
+				top: -30rem;
+			}
+			80% {
+				top: 10rem;
+			}
+			100% {
+				top: 8rem;
+			}
 		}
 	}
 </style>

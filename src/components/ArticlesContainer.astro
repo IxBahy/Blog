@@ -31,7 +31,9 @@ const articlesArray = [
 ];
 ---
 
-<div class="mt-24 mobile:w-full mobile:mx-auto">
+<main
+	class="article__container max-w-2xl ms-24 mt-24 mobile:w-full mobile:mx-auto"
+>
 	<!-- article Card -->
 	{
 		articlesArray.map((article) => {
@@ -45,4 +47,16 @@ const articlesArray = [
 			);
 		})
 	}
-</div>
+</main>
+
+<style is:global>
+	.article__card {
+		transition: opacity 0.2s linear;
+	}
+	.article__container:hover .article__card:not(:hover) {
+		opacity: 0.5;
+	}
+	.article__container:hover .article__card:hover {
+		box-shadow: 6px 9px 12px -3px rgb(6 2 20 / 85%);
+	}
+</style>
