@@ -57,7 +57,7 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 		</div>
 		<footer>
 			<div class="btn__container">
-				<a href="#" class="btn__social">
+				<a href="https://www.linkedin.com/in/ixbahy/" class="btn__social">
 					<svg
 						fill="currentcolor"
 						width="21px"
@@ -71,7 +71,11 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 					</svg>
 				</a>
 				<div class="spotlight"></div>
-				<a href="#" class="btn__social">
+				<a
+					href="https://github.com/IxBahy"
+					class="btn__social"
+					style="border-width: 2px;"
+				>
 					<svg
 						fill="currentcolor"
 						width="20px"
@@ -121,7 +125,7 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 	footer {
 		height: 6rem;
 		width: 3.5px;
-		background-color: rgba(121, 121, 128, 0.712);
+		background-color: rgb(30 27 75);
 		border-top-right-radius: 1rem;
 		border-top-left-radius: 1rem;
 		position: fixed;
@@ -136,7 +140,7 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 			top: -1.2rem;
 			left: -1px;
 			transform: rotate(45deg);
-			background-color: rgb(94, 94, 97);
+			background-color: rgba(49, 46, 129, 0.85);
 		}
 		&::before {
 			content: "";
@@ -147,7 +151,7 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 			top: -2.2rem;
 			left: -1px;
 			transform: rotate(45deg);
-			background-color: rgb(94, 94, 97);
+			background-color: rgba(49, 46, 129, 0.85);
 		}
 		& .btn__container {
 			position: absolute;
@@ -162,13 +166,17 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 				left: 50%;
 				transform: translate(-50%, -50%);
 				border-radius: 50%;
-				box-shadow: inset 0 0 100px #c9cece23, 0 0 20px #94979733,
-					0 0 60px #888d8d6c, 0 0 150px #888d8d6c;
+				box-shadow: inset 0 0 100px rgb(35, 30, 75),
+					0 0 30px rgba(21, 18, 56, 0.753), 0 0 60px rgb(67 56 202),
+					0 0 150px rgb(148, 141, 223);
 			}
 			& .btn__social {
 				display: inline-block;
 				margin-bottom: 0.5rem;
-				color: rgb(94, 94, 97);
+				color: rgba(47, 94, 155, 0.726);
+				border: 1px solid rgba(35, 30, 75, 0.671);
+				box-shadow: 0px 2px 3px rgba(36, 35, 35, 0.788),
+					0px 2px 5px rgba(36, 35, 35, 0.548);
 			}
 		}
 	}
@@ -235,6 +243,16 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 		}
 	}
 	@media screen and (max-width: 640px) {
+		footer {
+			left: 2rem;
+			& .btn__container {
+				& .spotlight {
+					box-shadow: inset 0 0 100px rgba(35, 30, 75, 0.651),
+						0 0 30px rgba(21, 18, 56, 0.411), 0 0 50px rgba(68, 56, 202, 0.418),
+						0 0 80px rgba(148, 141, 223, 0.671);
+				}
+			}
+		}
 		.svg--first {
 			left: 7.5rem;
 			top: 8rem;
