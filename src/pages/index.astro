@@ -20,7 +20,7 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 	<body
 		class="relative leading-relaxed text-slate-400 antialiased selection:bg-slate-400 selection:text-slate-800"
 	>
-		<div class="svg__container svg--first mobile:top-32 mobile:left-16">
+		<div class="svg__container svg--first">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="200"
@@ -35,7 +35,7 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 				></path></svg
 			>
 		</div>
-		<div class="svg__container svg--second mobile:bottom-48 mobile:right-28">
+		<div class="svg__container svg--second">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="200"
@@ -148,6 +148,14 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 		}
 	}
 	@media screen and (max-width: 640px) {
+		.svg--first {
+			left: 7.5rem;
+			top: 8rem;
+		}
+		.svg--second {
+			right: 7.5rem;
+			bottom: 12rem;
+		}
 		@keyframes svg__animation--first {
 			0% {
 				top: -30rem;
