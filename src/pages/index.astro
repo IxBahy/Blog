@@ -2,22 +2,11 @@
 import Header from "../components/Header.astro";
 import ArticlesContainer from "../components/ArticlesContainer.astro";
 import Footer from "../components/Footer.astro";
+import Head from "../components/Head.astro";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap"
-			rel="stylesheet"
-		/>
-		<meta name="generator" content={Astro.generator} />
-		<title>Bahy's Blog</title>
-	</head>
+	<Head />
 	<body
 		class="relative leading-relaxed text-slate-400 antialiased selection:bg-slate-400 selection:text-slate-800"
 	>
@@ -52,122 +41,124 @@ import Footer from "../components/Footer.astro";
 			>
 		</div>
 		<div class="mouse__spotlight"></div>
+		<!-- main wrapper -->
 		<div class="flex justify-center mt-52 mobile:flex-col mobile:mx-20">
 			<Header />
 			<ArticlesContainer />
 		</div>
 		<Footer />
+		<script>
+			const spotlight =
+				document.querySelector<HTMLElement>(".mouse__spotlight");
+			addEventListener("mousemove", (event: MouseEvent) => {
+				const x = event.clientX;
+				const y = event.clientY;
+				spotlight.style.top = y + "px";
+				spotlight.style.left = x + "px";
+				spotlight.style.display = "block";
+			});
+			addEventListener("mouseout", (event: MouseEvent) => {
+				spotlight.style.display = "none";
+			});
+		</script>
+		<style>
+			:global(*) {
+				margin: 0px;
+				padding: 0px;
+				font-size: 10px;
+			}
+
+			body {
+				background: linear-gradient(
+					90deg,
+					rgb(10, 16, 29) 0%,
+					rgb(16, 5, 56) 33%,
+					rgb(16, 5, 56) 66%,
+					rgb(10, 16, 29) 100%
+				);
+				font-family: "Inter", sans-serif;
+			}
+			.mouse__spotlight {
+				display: none;
+				position: fixed;
+				z-index: 9000;
+				pointer-events: none;
+				width: 40px;
+				height: 40px;
+				background: #d8dddd21;
+				box-shadow: 0 0 20px #94979733, 0 0 60px #888d8d6c, 0 0 100px #888d8d6c,
+					0 0 200px #c0c9c99a;
+				opacity: 0.5;
+				border-radius: 50%;
+				transform: translate(-40%, -40%);
+			}
+			.svg__container {
+				position: absolute;
+				z-index: -1;
+				width: fit-content;
+				height: fit-content;
+			}
+			.svg--first {
+				position: fixed;
+				left: 15rem;
+				top: 5rem;
+				animation: svg__animation--spin 10s linear infinite,
+					svg__animation--first 1.5s ease-in-out;
+			}
+			.svg--second {
+				right: 15rem;
+				bottom: 5rem;
+				animation: svg__animation--spin 10s linear infinite;
+			}
+			.cursor {
+				border-right: 2px solid whitesmoke;
+				margin-inline-start: 2px;
+				padding-top: 2px;
+				animation: cursor 0.6s step-end infinite alternate;
+			}
+
+			@keyframes cursor {
+				50% {
+					border: transparent;
+				}
+			}
+			@keyframes svg__animation--spin {
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+			@keyframes svg__animation--first {
+				0% {
+					top: -30rem;
+				}
+				80% {
+					top: 8rem;
+				}
+				100% {
+					top: 5rem;
+				}
+			}
+			@media screen and (max-width: 640px) {
+				.svg--first {
+					left: 7.5rem;
+					top: 8rem;
+				}
+				.svg--second {
+					right: 7.5rem;
+					bottom: 12rem;
+				}
+				@keyframes svg__animation--first {
+					0% {
+						top: -30rem;
+					}
+					80% {
+						top: 10rem;
+					}
+					100% {
+						top: 8rem;
+					}
+				}
+			}
+		</style>
 	</body>
 </html>
-<script>
-	const spotlight = document.querySelector<HTMLElement>(".mouse__spotlight");
-	addEventListener("mousemove", (event: MouseEvent) => {
-		const x = event.clientX;
-		const y = event.clientY;
-		spotlight.style.top = y + "px";
-		spotlight.style.left = x + "px";
-		spotlight.style.display = "block";
-	});
-	addEventListener("mouseout", (event: MouseEvent) => {
-		spotlight.style.display = "none";
-	});
-</script>
-<style>
-	:global(*) {
-		margin: 0px;
-		padding: 0px;
-		font-size: 10px;
-	}
-
-	body {
-		background: linear-gradient(
-			90deg,
-			rgb(10, 16, 29) 0%,
-			rgb(16, 5, 56) 33%,
-			rgb(16, 5, 56) 66%,
-			rgb(10, 16, 29) 100%
-		);
-		font-family: "Inter", sans-serif;
-	}
-	.mouse__spotlight {
-		display: none;
-		position: fixed;
-		z-index: 9000;
-		pointer-events: none;
-		width: 40px;
-		height: 40px;
-		background: #d8dddd21;
-		box-shadow: 0 0 20px #94979733, 0 0 60px #888d8d6c, 0 0 100px #888d8d6c,
-			0 0 200px #c0c9c99a;
-		opacity: 0.5;
-		border-radius: 50%;
-		transform: translate(-40%, -40%);
-	}
-	.svg__container {
-		position: absolute;
-		z-index: -1;
-		width: fit-content;
-		height: fit-content;
-	}
-	.svg--first {
-		position: fixed;
-		left: 15rem;
-		top: 5rem;
-		animation: svg__animation--spin 10s linear infinite,
-			svg__animation--first 1.5s ease-in-out;
-	}
-	.svg--second {
-		right: 15rem;
-		bottom: 5rem;
-		animation: svg__animation--spin 10s linear infinite;
-	}
-	.cursor {
-		border-right: 2px solid whitesmoke;
-		margin-inline-start: 2px;
-		padding-top: 2px;
-		animation: cursor 0.6s step-end infinite alternate;
-	}
-
-	@keyframes cursor {
-		50% {
-			border: transparent;
-		}
-	}
-	@keyframes svg__animation--spin {
-		100% {
-			transform: rotate(360deg);
-		}
-	}
-	@keyframes svg__animation--first {
-		0% {
-			top: -30rem;
-		}
-		80% {
-			top: 8rem;
-		}
-		100% {
-			top: 5rem;
-		}
-	}
-	@media screen and (max-width: 640px) {
-		.svg--first {
-			left: 7.5rem;
-			top: 8rem;
-		}
-		.svg--second {
-			right: 7.5rem;
-			bottom: 12rem;
-		}
-		@keyframes svg__animation--first {
-			0% {
-				top: -30rem;
-			}
-			80% {
-				top: 10rem;
-			}
-			100% {
-				top: 8rem;
-			}
-		}
-	}
-</style>
