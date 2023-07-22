@@ -7,7 +7,10 @@ const { frontmatter } = Astro.props;
 ---
 
 <html lang="en">
-	<Head title={frontmatter.title} />
+	<Head
+		title={frontmatter.title}
+		description={`an article about ${frontmatter.title}`}
+	/>
 	<body class="bg-[#240e38]">
 		<Spotlight position="top:-3%; left:0%;" />
 		<Spotlight position="bottom:-3%; right:0%;" />
