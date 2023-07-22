@@ -68,20 +68,20 @@ const { name, image, desc, mediumLink } = Astro.props;
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 		transition-duration: 150ms;
 		box-shadow: 0px 4px 13px 0px rgb(17 24 39);
-		&:hover {
-			background-color: rgba(229, 231, 235, 0.8);
-			padding-inline-end: 12rem;
-			box-shadow: 0px 4px 9px 0px rgb(75 85 99);
-			& span {
-				display: inline;
-			}
-		}
-		& span {
-			transition-property: all;
-			transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-			transition-duration: 300ms;
-			display: none;
-		}
+	}
+	.btn__medium:hover {
+		background-color: rgba(229, 231, 235, 0.8);
+		padding-inline-end: 12rem;
+		box-shadow: 0px 4px 9px 0px rgb(75 85 99);
+	}
+	.btn__medium span {
+		display: none;
+	}
+	.btn__medium:hover span {
+		display: inline;
+		transition-property: all;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-duration: 300ms;
 	}
 
 	.btn__blog {
@@ -93,20 +93,20 @@ const { name, image, desc, mediumLink } = Astro.props;
 		padding: 0.8rem 1.5rem;
 		border-radius: 9999px;
 		transition: all 0.3s ease-in, box-shadow 0.5s ease-in-out;
-		&:hover {
-			box-shadow: inset 100px 0 0 0 rgb(16, 14, 46);
-			color: rgb(229 231 235);
-			border: 1px solid rgb(145, 145, 150);
-		}
+	}
+	.btn__blog:hover {
+		box-shadow: inset 100px 0 0 0 rgb(16, 14, 46);
+		color: rgb(229 231 235);
+		border: 1px solid rgb(145, 145, 150);
 	}
 	@media screen and (max-width: 640px) {
 		.btn__medium:hover {
 			background-color: rgba(229, 231, 235, 0.8);
 			padding-inline-end: 0.5rem;
 			box-shadow: 0px 4px 9px 0px rgb(75 85 99);
-			& span {
-				display: none;
-			}
+		}
+		.btn__medium:hover span {
+			display: none;
 		}
 	}
 </style>

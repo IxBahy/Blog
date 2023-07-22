@@ -8,10 +8,7 @@ export const Biography = () => {
 		`Mohamed is a computer science student and is an enthusiastic web dev,
         he is currently learning JavaScript and other related web languages,tools, and topics and 
         will hopefully share all that he learns in this journey with you in articles so stay tuned`,
-		`Mohamed is a software engineer that respects the quality of the code and the cleanness of it
-        and a very passionate Web developer that keeps up with all the new trends in development and the JavaScript
-        frameworks and open to use and learn different tech to solve problems in a more efficient way and will write about all this in here.\nhe mainly works with React but he's flexable with the choices, he has some knowledge in the backend and in the design patterns too
-        and also a certified AWS practitioner`,
+		`I honestly dont have a bigger bio so get this fried rice recipe from Chat GPT. Try this mouthwatering Chicken Fried Rice: Cook day-old rice. Sauté diced chicken, mixed veggies, garlic. Scramble eggs, combine all ingredients. Create a flavorful sauce with soy sauce, oyster sauce, sesame oil; drizzle over the rice. Season and stir briefly. Garnish with green onions. A delightful dish to savor! Customize by adding shrimp, pork, or more veggies to suit your taste. `,
 	];
 	const [currentBio, setCurrentBio] = useState(1);
 	const [biography, setBiography] = useState(biographiesArray[1]);
