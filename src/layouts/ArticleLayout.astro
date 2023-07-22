@@ -1,0 +1,33 @@
+---
+import Footer from "../components/Footer.astro";
+import Head from "../components/Head.astro";
+import HomeButton from "../components/HomeButton.astro";
+import Spotlight from "../components/Spotlight.astro";
+const { frontmatter } = Astro.props;
+---
+
+<html lang="en">
+	<Head title={frontmatter.title} />
+	<body class="bg-[#240e38]">
+		<Spotlight position="top:-3%; left:0%;" />
+		<Spotlight position="bottom:-3%; right:0%;" />
+		<HomeButton />
+		<article class="w-3/5 mx-auto my-32 font-mono text-gray-100 mobile:w-[72%]">
+			<h2 class="text-gray-100 text-6xl mb-6 font-bold text-center">
+				{frontmatter.title}
+			</h2>
+			<slot />
+		</article>
+		<Footer spotlight="false" primaryColor=" rgb(60 27 91)" />
+		<style>
+			:global(*) {
+				margin: 0px;
+				padding: 0px;
+				font-size: 10px;
+			}
+			article {
+				font-size: 1.6rem;
+			}
+		</style>
+	</body>
+</html>

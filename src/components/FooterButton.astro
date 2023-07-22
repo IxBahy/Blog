@@ -1,18 +1,19 @@
 ---
-const { link, icon } = Astro.props;
+const { link, fillColor } = Astro.props;
 ---
 
 <a href={link} target="_blank" class="btn__social">
 	<slot />
 </a>
-
-<style>
+<style define:vars={{ fillColor }}>
 	.btn__social {
 		display: inline-block;
 		margin-bottom: 0.5rem;
-		color: rgba(47, 94, 155, 0.726);
-		border: 1px solid rgba(35, 30, 75, 0.671);
-		box-shadow: 0px 2px 3px rgba(36, 35, 35, 0.788),
-			0px 2px 5px rgba(36, 35, 35, 0.548);
+		color: var(--fillColor);
+		border: 1px solid rgba(35, 30, 75, 0.808);
+		box-shadow: 0px 2px 3px rgba(36, 35, 35, 0.63),
+			0px 2px 4px rgba(29, 28, 28, 0.425);
+		filter: brightness(150%) opacity(85%);
 	}
 </style>
+<!-- rgba(47, 94, 155, 0.726); -->

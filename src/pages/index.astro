@@ -6,7 +6,7 @@ import Head from "../components/Head.astro";
 ---
 
 <html lang="en">
-	<Head />
+	<Head title="Bahy's Blog" />
 	<body
 		class="relative leading-relaxed text-slate-400 antialiased selection:bg-slate-400 selection:text-slate-800"
 	>
@@ -46,21 +46,7 @@ import Head from "../components/Head.astro";
 			<Header />
 			<ArticlesContainer />
 		</div>
-		<Footer />
-		<script>
-			const spotlight =
-				document.querySelector<HTMLElement>(".mouse__spotlight");
-			addEventListener("mousemove", (event: MouseEvent) => {
-				const x = event.clientX;
-				const y = event.clientY;
-				spotlight.style.top = y + "px";
-				spotlight.style.left = x + "px";
-				spotlight.style.display = "block";
-			});
-			addEventListener("mouseout", (event: MouseEvent) => {
-				spotlight.style.display = "none";
-			});
-		</script>
+		<Footer primaryColor=" rgb(30 ,27 ,75)" />
 		<style>
 			:global(*) {
 				margin: 0px;
@@ -110,7 +96,7 @@ import Head from "../components/Head.astro";
 				bottom: 5rem;
 				animation: svg__animation--spin 10s linear infinite;
 			}
-			.cursor {
+			:global(.cursor) {
 				border-right: 2px solid whitesmoke;
 				margin-inline-start: 2px;
 				padding-top: 2px;
@@ -160,5 +146,19 @@ import Head from "../components/Head.astro";
 				}
 			}
 		</style>
+		<script>
+			const spotlight =
+				document.querySelector<HTMLElement>(".mouse__spotlight");
+			addEventListener("mousemove", (event: MouseEvent) => {
+				const x = event.clientX;
+				const y = event.clientY;
+				spotlight.style.top = y + "px";
+				spotlight.style.left = x + "px";
+				spotlight.style.display = "block";
+			});
+			addEventListener("mouseout", (event: MouseEvent) => {
+				spotlight.style.display = "none";
+			});
+		</script>
 	</body>
 </html>

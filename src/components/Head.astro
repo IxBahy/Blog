@@ -1,4 +1,7 @@
 ---
+// @ts-ignore
+// import { ViewTransitions } from "astro:transitions";
+const { title } = Astro.props;
 ---
 
 <head>
@@ -12,5 +15,6 @@
 		rel="stylesheet"
 	/>
 	<meta name="generator" content={Astro.generator} />
-	<title>Bahy's Blog</title>
+	<title>{title}</title>
+	<!-- <ViewTransitions /> -->
 </head>

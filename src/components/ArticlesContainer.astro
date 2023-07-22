@@ -1,18 +1,10 @@
 ---
 import ArticleCard from "./ArticleCard.astro";
-import articleImage from "../assets/Var.webp";
-import comingSoonImage from "../assets/soon.webp";
-import closureImage from "../assets/closure.webp";
+import articleImage from "/assets/Var.webp";
+import comingSoonImage from "/assets/soon.webp";
+import closureImage from "/assets/closure.webp";
 
 const articlesArray = [
-	{
-		name: "The Var History",
-		image: articleImage,
-		desc: `var and let might do almost the same job but under the hood var is a different bread,
-            Variables declared with var are either function-scoped or global-scoped. They are visible through blocks => no block scope.
-            and they are always hoisted and tolerate redeclaration ‘ That’s the difference in a nutshell ‘`,
-		mediumLink: "https://medium.com/@ixbahy/the-javascript-var-676e740454db",
-	},
 	{
 		name: "Scopes & closures",
 		image: closureImage,
@@ -21,16 +13,39 @@ const articlesArray = [
             so what are some uses of the scopes or why it’s important to understand them`,
 		mediumLink:
 			"https://medium.com/@ixbahy/javascript-scopes-environments-and-closures-922168eb7f2",
+		link: "/articles/Environments and closures",
 	},
+	{
+		name: "The Var History",
+		image: articleImage,
+		desc: `var and let might do almost the same job but under the hood var is a different bread,
+            Variables declared with var are either function-scoped or global-scoped. They are visible through blocks => no block scope.
+            and they are always hoisted and tolerate redeclaration ‘ That’s the difference in a nutshell ‘`,
+		mediumLink: "https://medium.com/@ixbahy/the-javascript-var-676e740454db",
+		link: "/articles/The Var History",
+	},
+
 	{
 		name: "prototype & inheritance",
 		image: comingSoonImage,
 		desc: `In the world of JavaScript, prototypes and inheritance are fundamental concepts.  while taking advantage of JavaScript's flexible and powerful object model.`,
 		mediumLink: "https://medium.com/@ixbahy",
+		link: "#",
 	},
 ];
 ---
 
+<style>
+	:global(.article__card) {
+		transition: opacity 0.2s linear;
+	}
+	.article__container:hover :global(.article__card:not(:hover)) {
+		opacity: 0.5;
+	}
+	.article__container:hover :global(.article__card:hover) {
+		box-shadow: 6px 9px 12px -3px rgb(6 2 20 / 85%);
+	}
+</style>
 <main
 	class="article__container max-w-2xl ms-24 mt-24 mobile:w-full mobile:mx-auto"
 >
@@ -43,20 +58,9 @@ const articlesArray = [
 					image={article.image}
 					desc={article.desc}
 					mediumLink={article.mediumLink}
+					link={article.link}
 				/>
 			);
 		})
 	}
 </main>
-
-<style is:global>
-	.article__card {
-		transition: opacity 0.2s linear;
-	}
-	.article__container:hover .article__card:not(:hover) {
-		opacity: 0.5;
-	}
-	.article__container:hover .article__card:hover {
-		box-shadow: 6px 9px 12px -3px rgb(6 2 20 / 85%);
-	}
-</style>

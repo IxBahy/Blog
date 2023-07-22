@@ -1,6 +1,6 @@
 ---
 import MediumButton from "./MediumButton.astro";
-const { name, image, desc, mediumLink } = Astro.props;
+const { name, image, desc, mediumLink, link } = Astro.props;
 ---
 
 <div class="article__card w-full mb-8">
@@ -15,7 +15,7 @@ const { name, image, desc, mediumLink } = Astro.props;
 				src={image}
 				width="100"
 				height="100"
-				alt=""
+				alt={name}
 			/>
 			<p class="mobile:w-full">
 				{desc.length > 100 ? desc.substr(0, 100) + "..." : desc}
@@ -24,11 +24,10 @@ const { name, image, desc, mediumLink } = Astro.props;
 		<!-- buttons -->
 		<div class="flex justify-evenly">
 			<MediumButton link={mediumLink} />
-			<a class="btn__blog" href="#">Read here</a>
+			<a class="btn__blog" href={link}>Read here</a>
 		</div>
 	</div>
 </div>
-
 <style>
 	.btn__blog {
 		border: 1px solid rgb(92, 92, 94);
