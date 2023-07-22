@@ -64,7 +64,7 @@ export const Biography = () => {
 	};
 	return (
 		<>
-			<div className=" shadow-gray-400 shadow-md  ring-slate-500 ring-2 rounded-md  mt-6 bg-slate-950 bg-opacity-50 text-gray-200 p-6 ">
+			<div className=" shadow-gray-400 shadow-md  ring-slate-400 ring-2 rounded-md  mt-6 bg-slate-950 bg-opacity-50 text-gray-200 p-6 ">
 				<div>
 					<div className="mx-auto">
 						<p

@@ -1,0 +1,18 @@
+---
+const { link, icon } = Astro.props;
+---
+
+<a href={link} target="_blank" class="btn__social">
+	<slot />
+</a>
+
+<style>
+	.btn__social {
+		display: inline-block;
+		margin-bottom: 0.5rem;
+		color: rgba(47, 94, 155, 0.726);
+		border: 1px solid rgba(35, 30, 75, 0.671);
+		box-shadow: 0px 2px 3px rgba(36, 35, 35, 0.788),
+			0px 2px 5px rgba(36, 35, 35, 0.548);
+	}
+</style>

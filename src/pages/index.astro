@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import ArticlesContainer from "../components/ArticlesContainer.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <html lang="en">
@@ -55,46 +56,7 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 			<Header />
 			<ArticlesContainer />
 		</div>
-		<footer>
-			<div class="btn__container">
-				<a
-					href="https://www.linkedin.com/in/ixbahy/"
-					target="_blank"
-					class="btn__social"
-				>
-					<svg
-						fill="currentcolor"
-						width="21px"
-						height="21px"
-						viewBox="2 2 20 20"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M20 3H4a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM8.339 18.337H5.667v-8.59h2.672v8.59zM7.003 8.574a1.548 1.548 0 1 1 0-3.096 1.548 1.548 0 0 1 0 3.096zm11.335 9.763h-2.669V14.16c0-.996-.018-2.277-1.388-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248h-2.667v-8.59h2.56v1.174h.037c.355-.675 1.227-1.387 2.524-1.387 2.704 0 3.203 1.778 3.203 4.092v4.71z"
-						></path>
-					</svg>
-				</a>
-				<div class="spotlight"></div>
-				<a
-					href="https://github.com/IxBahy"
-					target="_blank"
-					class="btn__social"
-					style="border-width: 2px;"
-				>
-					<svg
-						fill="currentcolor"
-						width="20px"
-						height="20px"
-						viewBox="2 2 12 15"
-						xmlns="http://www.w3.org/2000/svg"
-						class="cf-icon-svg"
-						><path
-							d="M15.917 1.666V17.5h-5.15c-.424 0-.557-.238-.557-.455 0-.266.01-1.141.01-2.226a1.935 1.935 0 0 0-.552-1.502c1.808-.202 3.706-.887 3.706-4.005a3.134 3.134 0 0 0-.834-2.177 2.914 2.914 0 0 0-.081-2.147s-.68-.218-2.23.832a7.684 7.684 0 0 0-4.063 0c-1.55-1.05-2.23-.832-2.23-.832a2.918 2.918 0 0 0-.08 2.147 3.142 3.142 0 0 0-.835 2.177c0 3.11 1.894 3.806 3.696 4.011a1.737 1.737 0 0 0-.516 1.084 1.726 1.726 0 0 1-2.361-.674 1.706 1.706 0 0 0-1.243-.836s-.793-.01-.056.494a2.145 2.145 0 0 1 .9 1.187s.478 1.578 2.735 1.088c.004.676.01 1.186.01 1.38 0 .214-.147.454-.553.454H.083V1.666z"
-						></path>
-					</svg>
-				</a>
-			</div>
-		</footer>
+		<Footer />
 	</body>
 </html>
 <script>
@@ -110,8 +72,8 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 		spotlight.style.display = "none";
 	});
 </script>
-<style is:global>
-	* {
+<style>
+	:global(*) {
 		margin: 0px;
 		padding: 0px;
 		font-size: 10px;
@@ -126,64 +88,6 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 			rgb(10, 16, 29) 100%
 		);
 		font-family: "Inter", sans-serif;
-	}
-	footer {
-		height: 6rem;
-		width: 3.5px;
-		background-color: rgb(30 27 75);
-		border-top-right-radius: 1rem;
-		border-top-left-radius: 1rem;
-		position: fixed;
-		bottom: 0rem;
-		left: 8rem;
-	}
-	footer::after {
-		content: "";
-		display: inline-block;
-		width: 6px;
-		height: 6px;
-		position: absolute;
-		top: -1.2rem;
-		left: -1px;
-		transform: rotate(45deg);
-		background-color: rgba(49, 46, 129, 0.85);
-	}
-	footer::before {
-		content: "";
-		display: inline-block;
-		width: 6px;
-		height: 6px;
-		position: absolute;
-		top: -2.2rem;
-		left: -1px;
-		transform: rotate(45deg);
-		background-color: rgba(49, 46, 129, 0.85);
-	}
-	.btn__container {
-		position: absolute;
-		top: -8.2rem;
-		left: -0.8rem;
-	}
-	.btn__social {
-		display: inline-block;
-		margin-bottom: 0.5rem;
-		color: rgba(47, 94, 155, 0.726);
-		border: 1px solid rgba(35, 30, 75, 0.671);
-		box-shadow: 0px 2px 3px rgba(36, 35, 35, 0.788),
-			0px 2px 5px rgba(36, 35, 35, 0.548);
-	}
-	.btn__container .spotlight {
-		z-index: -1;
-		width: 40px;
-		height: 40px;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		border-radius: 50%;
-		box-shadow: inset 0 0 100px rgba(32, 26, 78, 0.884),
-			0 0 30px rgba(21, 18, 56, 0.753), 0 0 60px rgb(67 56 202),
-			0 0 150px rgb(148, 141, 223);
 	}
 	.mouse__spotlight {
 		display: none;
@@ -246,14 +150,6 @@ import ArticlesContainer from "../components/ArticlesContainer.astro";
 		}
 	}
 	@media screen and (max-width: 640px) {
-		footer {
-			left: 2rem;
-		}
-		.btn__container .spotlight {
-			box-shadow: inset 0 0 100px rgba(35, 30, 75, 0.651),
-				0 0 30px rgba(21, 18, 56, 0.411), 0 0 50px rgba(68, 56, 202, 0.418),
-				0 0 80px rgba(148, 141, 223, 0.671);
-		}
 		.svg--first {
 			left: 7.5rem;
 			top: 8rem;
