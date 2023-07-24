@@ -97,7 +97,7 @@ export const Biography = () => {
 							<div>
 								<input
 									checked={currentBio === 1}
-									aria-checked={newBio === 0}
+									aria-checked={newBio === 1}
 									onChange={handleBioChange}
 									className="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-500 checked:bg-slate-500 checked:ring-1 checked:ring-gray-100 checked:before:bg-gray-100 hover:before:opacity-10"
 									type="radio"

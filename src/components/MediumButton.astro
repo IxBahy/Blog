@@ -2,7 +2,13 @@
 const { link } = Astro.props;
 ---
 
-<a href={link} target="_blank" class="btn__medium">
+<a
+	href={link}
+	target="_blank"
+	class="btn__medium"
+	role="button"
+	aria-label="Read on medium"
+	>
 	<svg
 		class="inline-block mx-1"
 		width="20px"

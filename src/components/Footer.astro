@@ -4,8 +4,9 @@ const { spotlight = false, primaryColor } = Astro.props;
 ---
 
 <footer>
-	<div class="btn__container">
+	<div class="btn__container" tabindex="0" aria-label="social media links">
 		<FooterButton
+			label="'linkedin"
 			fillColor={primaryColor}
 			link={"https://www.linkedin.com/in/ixbahy/"}
 		>
@@ -22,7 +23,11 @@ const { spotlight = false, primaryColor } = Astro.props;
 			</svg>
 		</FooterButton>
 		<div class="spotlight" hidden={spotlight}></div>
-		<FooterButton fillColor={primaryColor} link={"https://github.com/IxBahy"}>
+		<FooterButton
+			fillColor={primaryColor}
+			link={"https://github.com/IxBahy"}
+			label="github"
+		>
 			<svg
 				fill="currentcolor"
 				width="20px"

@@ -18,7 +18,7 @@ const articlesArray = [
 	{
 		name: "The Var History",
 		image: articleImage,
-		desc: `var and let might do almost the same job but under the hood var is a different bread,
+		desc: `var and let might do almost the same job but under the hood var is a different breed,
             Variables declared with var are either function-scoped or global-scoped. They are visible through blocks => no block scope.
             and they are always hoisted and tolerate redeclaration ‘ That’s the difference in a nutshell ‘`,
 		mediumLink: "https://medium.com/@ixbahy/the-javascript-var-676e740454db",
@@ -50,17 +50,20 @@ const articlesArray = [
 	class="article__container max-w-2xl ms-24 mt-24 mobile:w-full mobile:mx-auto"
 >
 	<!-- article Card -->
-	{
-		articlesArray.map((article) => {
-			return (
-				<ArticleCard
-					name={article.name}
-					image={article.image}
-					desc={article.desc}
-					mediumLink={article.mediumLink}
-					link={article.link}
-				/>
-			);
-		})
-	}
+	<ul aria-label="Articles" tabindex="0">
+		{
+			articlesArray.map((article) => {
+				return (
+					<ArticleCard
+						name={article.name}
+						image={article.image}
+						desc={article.desc}
+						mediumLink={article.mediumLink}
+						link={article.link}
+						role="listitem"
+					/>
+				);
+			})
+		}
+	</ul>
 </main>

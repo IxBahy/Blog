@@ -43,7 +43,7 @@ li{
 
 <br/>
 
-Var and let might do almost the same job but under the hood var is a different bread
+Var and let might do almost the same job but under the hood var is a different breed
 
 variables declared with var, are either function-scoped or global-scoped. They are visible through blocks => no block scope. and they are always hoisted and tolerate redeclaration ' That's the difference in a nutshell '
 
