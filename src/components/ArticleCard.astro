@@ -6,7 +6,7 @@ const { name, image, desc, mediumLink, link, role } = Astro.props;
 <li class="article__card w-full mb-8" role={role} tabindex="0">
 	<div
 		class="mobile:px-10 py-8 px-20 min-h-[235px] shadow-gray-950 shadow-lg ring-slate-900 ring-2 rounded-md mt-6 bg-gradient-to-br from-indigo-900 via-indigo-950 to-slate-950 bg-opacity-50 text-gray-200"
-		>
+	>
 		<h3 class="text-4xl text-start font-mono font-semibold" role="heading">
 			{name}
 		</h3>
@@ -26,8 +26,8 @@ const { name, image, desc, mediumLink, link, role } = Astro.props;
 		</div>
 		<!-- buttons -->
 		<div class="flex justify-evenly">
-			<MediumButton link={mediumLink} />
 			<a class="btn__blog" href={link} role="button">Read here</a>
+			<MediumButton link={mediumLink} />
 		</div>
 	</div>
 </li>
