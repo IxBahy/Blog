@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/ArticleLayout.astro
-title: Environments and closures
+title: Level Up Your FastAPI: Exception Handling Done Right
 ---
 
 <style>
@@ -39,7 +39,6 @@ li{
 
 
 
-# Level Up Your FastAPI: Exception Handling Done Right
 
 In FastAPI applications, managing exceptions effectively is crucial for creating robust and maintainable APIs. This guide will delve into organizing exception handlers, with a strong focus on leveraging default behaviors and implementing custom error-handling strategies. Let's break it down step by step, starting from how to handle exceptions in Python.
 
