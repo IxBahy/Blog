@@ -1,3 +1,44 @@
+---
+layout: ../../layouts/ArticleLayout.astro
+title: Environments and closures
+---
+
+<style>
+p{
+		font-size:16px;
+}
+img{
+	margin:0 auto;
+}
+h1{
+	font-size:3.2rem;
+}
+h2{
+	font-size:2.5rem;
+}
+h3{
+	font-size:2.2rem;
+}
+h4{
+	font-size:1.8rem;
+}
+h5{
+	font-size:1.5rem;
+}
+strong ,b {
+	font-size:1.8rem;
+	font-weight:bold;
+}
+ul{
+	list-style: disc;
+}
+li{
+	font-size:1.5rem;
+}
+</style>
+
+
+
 # Level Up Your FastAPI: Exception Handling Done Right
 
 In FastAPI applications, managing exceptions effectively is crucial for creating robust and maintainable APIs. This guide will delve into organizing exception handlers, with a strong focus on leveraging default behaviors and implementing custom error-handling strategies. Let's break it down step by step, starting from how to handle exceptions in Python.
