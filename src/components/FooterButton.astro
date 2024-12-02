@@ -1,8 +1,14 @@
 ---
-const { link, fillColor ,label} = Astro.props;
+const { link, fillColor, label } = Astro.props;
 ---
 
-<a href={link} role='link' aria-label={label} target="_blank" class="btn__social">
+<a
+	href={link}
+	role="link"
+	aria-label={label}
+	target="_blank"
+	class="btn__social"
+>
 	<slot />
 </a>
 <style define:vars={{ fillColor }}>

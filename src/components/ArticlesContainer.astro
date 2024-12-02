@@ -3,8 +3,16 @@ import ArticleCard from "./ArticleCard.astro";
 import articleImage from "/assets/Var.webp";
 import comingSoonImage from "/assets/soon.webp";
 import closureImage from "/assets/closure.webp";
+import errorsImage from "/assets/fastapi_errors.webp";
 
 const articlesArray = [
+	{
+		name: "Level Up Your FastAPI: Exception Handling Done Right",
+		image: errorsImage,
+		desc: `FastAPI's robust exception handling capabilities are key to building reliable APIs, yet many developers struggle to implement them effectively. This guide breaks down everything you need to know about handling exceptions in FastAPI `,
+		mediumLink: "https://medium.com/@ixbahy/level-up-your-fastapi-exception-handling-done-right-5db862038c7a",
+		link: "/articles/Level Up Your FastAPI, Exception Handling Done Right",
+	},
 	{
 		name: "Scopes & closures",
 		image: closureImage,
@@ -25,13 +33,6 @@ const articlesArray = [
 		link: "/articles/The Var History",
 	},
 
-	{
-		name: "prototype & inheritance",
-		image: comingSoonImage,
-		desc: `In the world of JavaScript, prototypes and inheritance are fundamental concepts.  while taking advantage of JavaScript's flexible and powerful object model.`,
-		mediumLink: "https://medium.com/@ixbahy",
-		link: "#",
-	},
 ];
 ---
 
