@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/ArticleLayout.astro
-title: Level Up Your FastAPI: Exception Handling Done Right
+title: Level Up Your FastAPI, Exception Handling Done Right
 ---
 
 <style>
@@ -52,51 +52,51 @@ This approach uses conditional statements to validate whether the next action wi
 
 #### Example 1.1
 ```typescript
-type ApiRequest = {
-  data: {
-      user: {
-        name?: string;
-      };
-    };
-};
+        type ApiRequest = {
+        data: {
+            user: {
+                name?: string;
+            };
+            };
+        };
 
-function fetchApiRequest(): ApiRequest {
-  return { data: { user: { name: "John Doe" } } };
-}
+        function fetchApiRequest(): ApiRequest {
+        return { data: { user: { name: "John Doe" } } };
+        }
 
-// Should be more complex here :p
-function isString(value: any): value is string {
-  return typeof value === 'string';
-}
+        // Should be more complex here :p
+        function isString(value: any): value is string {
+        return typeof value === 'string';
+        }
 
-function isDataPresent(request: ApiRequest): request is { data: { user?: { name?: string } } } {
-  return !!request.data;
-}
+        function isDataPresent(request: ApiRequest): request is { data: { user?: { name?: string } } } {
+        return !!request.data;
+        }
 
-function isUserPresent(data: { user?: { name?: string } }): data is { user: { name?: string } } {
-  return !!data.user;
-}
+        function isUserPresent(data: { user?: { name?: string } }): data is { user: { name?: string } } {
+        return !!data.user;
+        }
 
-function guard_request(request): bool {
-  if (!isDataPresent(request)) {
-    throw new Error("Data not available");
-  }
-  if (!isUserPresent(request.data)) {
-    throw new Error("User not available");
-  }
-  if (!isString(request.data.user.name)) {
-    throw new Error("Name is not a string");
-  }
-  return true;
-}
+        function guard_request(request): bool {
+        if (!isDataPresent(request)) {
+            throw new Error("Data not available");
+        }
+        if (!isUserPresent(request.data)) {
+            throw new Error("User not available");
+        }
+        if (!isString(request.data.user.name)) {
+            throw new Error("Name is not a string");
+        }
+        return true;
+        }
 
-// <!-- Actual Logic -->
-const request = fetchApiRequest();
-guard_request(request);
-const userName = request.data.user.name;
-const processedName = userName.trim().toUpperCase();
+        // <!-- Actual Logic -->
+        const request = fetchApiRequest();
+        guard_request(request);
+        const userName = request.data.user.name;
+        const processedName = userName.trim().toUpperCase();
 
-return `Hello, ${processedName}!`;
+        return `Hello, ${processedName}!`;
 ```
 
 While this example may seem simplistic, it demonstrates how this approach helps ensure that the object holding the name attribute is present. (Although we could replace the whole thing using optional chaining `request.data?.user?.name`, this example is for explanation purposes.)
@@ -115,28 +115,28 @@ As Pythonic as this approach is, I personally don't prefer it since we often end
 Here's the same code rewritten in Python using the EAFP approach:
 
 ```python
-class ApiRequest:
-    def __init__(self, data=None):
-        self.data = data
+            class ApiRequest:
+                def __init__(self, data=None):
+                    self.data = data
 
-def fetch_api_request() -> ApiRequest:
-    return ApiRequest(data={'user': {'name': 'John Doe'}})
+            def fetch_api_request() -> ApiRequest:
+                return ApiRequest(data={'user': {'name': 'John Doe'}})
 
-try:
-    request = fetch_api_request()
-    user_name = request.data['user']['name']
-    processed_name = user_name.strip().upper()
+            try:
+                request = fetch_api_request()
+                user_name = request.data['user']['name']
+                processed_name = user_name.strip().upper()
 
-    return f"Hello, {processed_name}!"
+                return f"Hello, {processed_name}!"
 
-except KeyError as e:
-    raise CustomKeyException(f"Error: Missing Key in the Request - {HTTPStatus.NOT_FOUND}") # which key?
+            except KeyError as e:
+                raise CustomKeyException(f"Error: Missing Key in the Request - {HTTPStatus.NOT_FOUND}") # which key?
 
-except TypeError as e:
-    raise CustomTypeException(f"Wrong Type was sent in the request - {HTTPStatus.BAD_REQUEST}")  # which value was wrong?
+            except TypeError as e:
+                raise CustomTypeException(f"Wrong Type was sent in the request - {HTTPStatus.BAD_REQUEST}")  # which value was wrong?
 
-except Exception as e:
-    raise ServerException(f"Error: {str(e)} - {HTTPStatus.INTERNAL_SERVER_ERROR}")  # Hmmm
+            except Exception as e:
+                raise ServerException(f"Error: {str(e)} - {HTTPStatus.INTERNAL_SERVER_ERROR}")  # Hmmm
 ```
 
 As you can see, we're catching exceptions and raising new ones with more meaningful messages and status codes. However, the problem is that we're not sure what caused the error, and they could be caught in the wrong place only to be overwritten again and again unnecessarily. The code is also more complex and harder to read and maintain since the logic is hidden inside try-except blocks. Imagine if you needed to recover from the exception and the code inside the exception block required its own try-except blocks pure pain!
@@ -151,33 +151,33 @@ However, once it gets more complicated, you should start separating the logic in
 
 #### Example 1.3
 ```python
-class ApiRequest:
-    def __init__(self, data=None):
-        self.data = data
+        class ApiRequest:
+            def __init__(self, data=None):
+                self.data = data
 
-def fetch_api_request() -> ApiRequest:
-    return ApiRequest(data={'user': {'name': 'John Doe'}})
+        def fetch_api_request() -> ApiRequest:
+            return ApiRequest(data={'user': {'name': 'John Doe'}})
 
-def process_request(data: Optional[ApiRequest]) -> str:
-    # Following the LBYL approach, we cover the cases we know that can happen 
-    # and raise a custom exception for each case to better handle it in a higher scope
-    if not data:
-        raise MissingRequestValueException(keys=['data'], message="Request is missing the data key")
-    
-    if not data.user:
-        raise MissingRequestValueException(keys=['data.user'], message="Request is missing the user key")
+        def process_request(data: Optional[ApiRequest]) -> str:
+            # Following the LBYL approach, we cover the cases we know that can happen 
+            # and raise a custom exception for each case to better handle it in a higher scope
+            if not data:
+                raise MissingRequestValueException(keys=['data'], message="Request is missing the data key")
+            
+            if not data.user:
+                raise MissingRequestValueException(keys=['data.user'], message="Request is missing the user key")
 
-    user_name = data.user.get('name', "Anonymous User") # here we handled if there was no name
-    processed_name = user_name.strip().upper()
-    return f"Hello, {processed_name}!"
+            user_name = data.user.get('name', "Anonymous User") # here we handled if there was no name
+            processed_name = user_name.strip().upper()
+            return f"Hello, {processed_name}!"
 
-# Our actual logic lies here - clean and readable
-request = fetch_api_request()
-result = process_request(request.get('data', None))
+        # Our actual logic lies here - clean and readable
+        request = fetch_api_request()
+        result = process_request(request.get('data', None))
 
-# And in some external handlers, we'll catch the exception and log it and perform 
-# a more suited action regarding the use case internally or externally, 
-# like returning a 500 server error or a 400 bad request
+        # And in some external handlers, we'll catch the exception and log it and perform 
+        # a more suited action regarding the use case internally or externally, 
+        # like returning a 500 server error or a 400 bad request
 ```
 
 ## Exception Types
@@ -207,14 +207,14 @@ So what can FastAPI provide out of the box? There are three main handlers we mus
 3. **HTTPException**: FastAPI will handle common HTTP status codes for you (404, 500, 401, 403, 400, etc.). Internally, it simply checks for the raised status code and returns the response with the status code and the body you provided in the exception if it's in a pre-specified set, or just the code if not.
 
 ```python
-async def http_exception_handler(request: Request, exc: HTTPException) -> Response:
-    # Simple, right?
-    headers = getattr(exc, "headers", None)
-    if not is_body_allowed_for_status_code(exc.status_code):
-        return Response(status_code=exc.status_code, headers=headers)
-    return JSONResponse(
-        {"detail": exc.detail}, status_code=exc.status_code, headers=headers
-    )
+        async def http_exception_handler(request: Request, exc: HTTPException) -> Response:
+            # Simple, right?
+            headers = getattr(exc, "headers", None)
+            if not is_body_allowed_for_status_code(exc.status_code):
+                return Response(status_code=exc.status_code, headers=headers)
+            return JSONResponse(
+                {"detail": exc.detail}, status_code=exc.status_code, headers=headers
+            )
 ```
 
 Simple and effective, right? It can work as the second generic handler after **Exception**, but it's still not perfect. We should understand how to reuse it rather than building a whole new handler from scratch.
@@ -247,61 +247,61 @@ However, once it gets more complicated, you should start separating the logic in
 
 #### Example 2.1
 ```python
-# utils.py
-import httpx
-from sqlalchemy.orm import Session
-from models import Item
-from time import sleep
+        # utils.py
+        import httpx
+        from sqlalchemy.orm import Session
+        from models import Item
+        from time import sleep
 
-def process_request(db: Session, item_id: int, token: str):
-    """
-    Fetch an item from the database. Raise an exception if not found.
-    """
-    item = db.query(Item).filter(Item.id == item_id).first()
-    if not item:
-        raise NotFoundException(exc=e, model=Item, id=item_id, token=token)
-    return item
+        def process_request(db: Session, item_id: int, token: str):
+            """
+            Fetch an item from the database. Raise an exception if not found.
+            """
+            item = db.query(Item).filter(Item.id == item_id).first()
+            if not item:
+                raise NotFoundException(exc=e, model=Item, id=item_id, token=token)
+            return item
 
-def fetch_data_from_service(service_url: str, retries: int = 3, delay: int = 2):
-    """
-    Fetch data from an external service with retry logic for connection and timeout errors.
-    """
-    for attempt in range(retries):
-        try:
-            response = httpx.get(service_url, timeout=5)
-            response.raise_for_status()
-            return response.json()
-        except (httpx.ConnectError, httpx.TimeoutException) as e:  # The except here is just for retries
-            if attempt < retries - 1:
-                sleep(delay)
-            else:
-                raise ExternalServiceUnavailableException(exc=e, service_url=service_url)
-        except httpx.HTTPStatusError as e:
-            raise ExternalServiceStatusException(exc=e, service_url=service_url, status_code=e.response.status_code)
+        def fetch_data_from_service(service_url: str, retries: int = 3, delay: int = 2):
+            """
+            Fetch data from an external service with retry logic for connection and timeout errors.
+            """
+            for attempt in range(retries):
+                try:
+                    response = httpx.get(service_url, timeout=5)
+                    response.raise_for_status()
+                    return response.json()
+                except (httpx.ConnectError, httpx.TimeoutException) as e:  # The except here is just for retries
+                    if attempt < retries - 1:
+                        sleep(delay)
+                    else:
+                        raise ExternalServiceUnavailableException(exc=e, service_url=service_url)
+                except httpx.HTTPStatusError as e:
+                    raise ExternalServiceStatusException(exc=e, service_url=service_url, status_code=e.response.status_code)
 ```
 
 For the route itself:
 
 ```python
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy.orm import Session
-from database import get_db
-from utils import process_request, fetch_data_from_service
+        from fastapi import FastAPI, Depends, HTTPException
+        from sqlalchemy.orm import Session
+        from database import get_db
+        from utils import process_request, fetch_data_from_service
 
-app = FastAPI()
+        app = FastAPI()
 
-SERVICE_URL = "https://api.example.com/data"
+        SERVICE_URL = "https://api.example.com/data"
 
-@app.get("/items/{item_id}")
-def get_item(item_id: int, db: Session = Depends(get_db), token: str = Depends(get_token)):
-    item = process_request(db, item_id, token)
-    external_data = fetch_data_from_service(SERVICE_URL)
+        @app.get("/items/{item_id}")
+        def get_item(item_id: int, db: Session = Depends(get_db), token: str = Depends(get_token)):
+            item = process_request(db, item_id, token)
+            external_data = fetch_data_from_service(SERVICE_URL)
 
-    return {
-        "id": item.id,
-        "name": item.name,
-        "external_data": external_data
-    }
+            return {
+                "id": item.id,
+                "name": item.name,
+                "external_data": external_data
+            }
 ```
 ### How to Write Exception Classes
 
@@ -313,54 +313,54 @@ For my implementation, I like my interface to abstract two functions:
 
 #### Example 2.2
 ```python
-from abc import ABC, abstractmethod
-class BaseCustomException(ABC):
-    """
-    Base interface for all custom exception classes.
-    Ensures that derived exceptions implement specific methods.
-    """
-    status_code: int = 500
+        from abc import ABC, abstractmethod
+        class BaseCustomException(ABC):
+            """
+            Base interface for all custom exception classes.
+            Ensures that derived exceptions implement specific methods.
+            """
+            status_code: int = 500
 
-    @property
-    @abstractmethod
-    def message(self) -> str:
-        """
-        Abstract property to provide a formatted message.
-        """
-        pass
-    
-    @property
-    @abstractmethod
-    def trace(self) -> str:
-        """
-        Abstract property to provide a formatted trace for logging.
-        """
-        pass
+            @property
+            @abstractmethod
+            def message(self) -> str:
+                """
+                Abstract property to provide a formatted message.
+                """
+                pass
+            
+            @property
+            @abstractmethod
+            def trace(self) -> str:
+                """
+                Abstract property to provide a formatted trace for logging.
+                """
+                pass
 
 
-class CustomException(BaseCustomException, Exception):
-    """
-    Example of a custom exception inheriting from the interface.
-    """
-    def __init__(self, key: str, location: str, exc: Exception = None):
-        self.key = key
-        self.location = location
-        self.exc = exc
-        # any data you need 
-        
-    @property
-    def message(self) -> str:
-        """
-        Formatted Exception message.
-        """
-        return f"Error in {self.key} for any reason"
+        class CustomException(BaseCustomException, Exception):
+            """
+            Example of a custom exception inheriting from the interface.
+            """
+            def __init__(self, key: str, location: str, exc: Exception = None):
+                self.key = key
+                self.location = location
+                self.exc = exc
+                # any data you need 
+                
+            @property
+            def message(self) -> str:
+                """
+                Formatted Exception message.
+                """
+                return f"Error in {self.key} for any reason"
 
-    @property
-    def trace(self) -> str:
-        """
-        Formatted Exception trace for logging.
-        """
-        return f"exception raised in {self.location} for " + (f"Trace: {self.exc}" if self.exc else "No trace available")
+            @property
+            def trace(self) -> str:
+                """
+                Formatted Exception trace for logging.
+                """
+                return f"exception raised in {self.location} for " + (f"Trace: {self.exc}" if self.exc else "No trace available")
 ```
 
 ## Handling Exceptions in FastAPI
@@ -378,122 +378,122 @@ However, I personally don't prefer this approach. Instead, we might create a Cli
 Let's start by making a base client:
 
 ```python
-# my_app/exceptions/handler.py
+        # my_app/exceptions/handler.py
 
-import logging
-from fastapi import Request
-from fastapi.responses import JSONResponse
+        import logging
+        from fastapi import Request
+        from fastapi.responses import JSONResponse
 
-class ExceptionHandlerClient:
-    def __init__(self, logger: logging.Logger = None):
-        """
-        Initializes the ExceptionHandlerClient.
+        class ExceptionHandlerClient:
+            def __init__(self, logger: logging.Logger = None):
+                """
+                Initializes the ExceptionHandlerClient.
 
-        Args:
-            logger (logging.Logger): Optional logger instance. If not provided, a default logger is created.
-        """
-        self.logger = logger or logging.getLogger(__name__) 
-        self._setup_default_logger()
+                Args:
+                    logger (logging.Logger): Optional logger instance. If not provided, a default logger is created.
+                """
+                self.logger = logger or logging.getLogger(__name__) 
+                self._setup_default_logger()
 
-    def _setup_default_logger(self):
-        """Sets up a default logger if none is provided."""
-        if not self.logger.handlers:
-            handler = logging.StreamHandler()
-            formatter = logging.Formatter(
-                "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-            )
-            handler.setFormatter(formatter)
-            self.logger.addHandler(handler)
-            self.logger.setLevel(logging.INFO)
+            def _setup_default_logger(self):
+                """Sets up a default logger if none is provided."""
+                if not self.logger.handlers:
+                    handler = logging.StreamHandler()
+                    formatter = logging.Formatter(
+                        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+                    )
+                    handler.setFormatter(formatter)
+                    self.logger.addHandler(handler)
+                    self.logger.setLevel(logging.INFO)
 
-    def __call__(self, request: Request, exception: BaseCustomException) -> JSONResponse:
-        """
-        Handles the exception and returns a JSONResponse.
+            def __call__(self, request: Request, exception: BaseCustomException) -> JSONResponse:
+                """
+                Handles the exception and returns a JSONResponse.
 
-        Args:
-            request (Request): The incoming HTTP request.
-            exception (Exception): The exception to handle.
+                Args:
+                    request (Request): The incoming HTTP request.
+                    exception (Exception): The exception to handle.
 
-        Returns:
-            JSONResponse: A JSON response containing the exception message.
-        """
-        self.logger.error(
-            f"Exception occurred while processing request {request.url}: {exception.trace}",
-        )
-        if isinstance(exception, CustomException):
-            pass
-            # do anything you need here and for Exception specific handling
+                Returns:
+                    JSONResponse: A JSON response containing the exception message.
+                """
+                self.logger.error(
+                    f"Exception occurred while processing request {request.url}: {exception.trace}",
+                )
+                if isinstance(exception, CustomException):
+                    pass
+                    # do anything you need here and for Exception specific handling
 
-        return JSONResponse(
-            content={"message": getattr(exception, "message", str(exception))},
-            status_code=exception.status_code,
-        )
+                return JSONResponse(
+                    content={"message": getattr(exception, "message", str(exception))},
+                    status_code=exception.status_code,
+                )
 ```
 
 That handles our custom exceptions, but what about the three other exceptions that FastAPI handles by default? You can either handle them in the client (more work but provides a consistent look) or handle them in other functions. I prefer to stick to a single client to handle all exceptions:
 
 ```python
-# my_app/exceptions/handler.py
+        # my_app/exceptions/handler.py
 
-import logging
-from fastapi import Request, HTTPException
-from fastapi.responses import JSONResponse
-from fastapi.exception_handlers import http_exception_handler
-from fastapi.exceptions import RequestValidationError, ResponseValidationError
+        import logging
+        from fastapi import Request, HTTPException
+        from fastapi.responses import JSONResponse
+        from fastapi.exception_handlers import http_exception_handler
+        from fastapi.exceptions import RequestValidationError, ResponseValidationError
 
-class ExceptionHandlerClient:
-    def __init__(self, logger: logging.Logger = None):
-        """
-        Initializes the ExceptionHandlerClient.
+        class ExceptionHandlerClient:
+            def __init__(self, logger: logging.Logger = None):
+                """
+                Initializes the ExceptionHandlerClient.
 
-        Args:
-            logger (logging.Logger): Optional logger instance. If not provided, a default logger is created.
-        """
-        self.logger = logger or logging.getLogger(__name__) 
-        self._setup_default_logger()
+                Args:
+                    logger (logging.Logger): Optional logger instance. If not provided, a default logger is created.
+                """
+                self.logger = logger or logging.getLogger(__name__) 
+                self._setup_default_logger()
 
-    def _setup_default_logger(self):
-        """Sets up a default logger if none is provided."""
-        if not self.logger.handlers:
-            handler = logging.StreamHandler()
-            formatter = logging.Formatter(
-                "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-            )
-            handler.setFormatter(formatter)
-            self.logger.addHandler(handler)
-            self.logger.setLevel(logging.INFO)
+            def _setup_default_logger(self):
+                """Sets up a default logger if none is provided."""
+                if not self.logger.handlers:
+                    handler = logging.StreamHandler()
+                    formatter = logging.Formatter(
+                        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+                    )
+                    handler.setFormatter(formatter)
+                    self.logger.addHandler(handler)
+                    self.logger.setLevel(logging.INFO)
 
-    def __call__(self, request: Request, exception: BaseCustomException) -> JSONResponse:
-        """
-        Handles the exception and returns a JSONResponse.
+            def __call__(self, request: Request, exception: BaseCustomException) -> JSONResponse:
+                """
+                Handles the exception and returns a JSONResponse.
 
-        Args:
-            request (Request): The incoming HTTP request.
-            exception (Exception): The exception to handle.
+                Args:
+                    request (Request): The incoming HTTP request.
+                    exception (Exception): The exception to handle.
 
-        Returns:
-            JSONResponse: A JSON response containing the exception message.
-        """
-        message = getattr(exception, "message", str(exception))
-        status_code = exception.status_code
-        
-        self.logger.error(
-            f"Exception occurred while processing request {request.url}: {exception.trace}",
-        )
-        
-        if isinstance(exception, HTTPException):
-            return await http_exception_handler(request, exc)
-        if isinstance(exception, RequestValidationError):
-            message = f'Format a message you want from the pydantic error returned'
-            status_code = 400
-        if isinstance(exception, ResponseValidationError):
-            message = f'Format a message you want from the pydantic error returned'
-            status_code = 500
+                Returns:
+                    JSONResponse: A JSON response containing the exception message.
+                """
+                message = getattr(exception, "message", str(exception))
+                status_code = exception.status_code
+                
+                self.logger.error(
+                    f"Exception occurred while processing request {request.url}: {exception.trace}",
+                )
+                
+                if isinstance(exception, HTTPException):
+                    return await http_exception_handler(request, exc)
+                if isinstance(exception, RequestValidationError):
+                    message = f'Format a message you want from the pydantic error returned'
+                    status_code = 400
+                if isinstance(exception, ResponseValidationError):
+                    message = f'Format a message you want from the pydantic error returned'
+                    status_code = 500
 
-        return JSONResponse(
-            content={"message": message},
-            status_code=status_code,
-        )
+                return JSONResponse(
+                    content={"message": message},
+                    status_code=status_code,
+                )
 ```
 
 See how we handled the default exceptions in the client and returned the response with the correct status code and message, making use of FastAPI's default handlers? 
